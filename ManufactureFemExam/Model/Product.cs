@@ -25,10 +25,19 @@ namespace ManufactureFemExam.Model
         public string Name { get; set; }
         public decimal Price { get; set; }
         public int UnitId { get; set; }
+        public bool IsProduct { get; set;  }
     
         public virtual ICollection<Manufacture> Manufacture { get; set; }
         public virtual ICollection<OrderProduct> OrderProduct { get; set; }
         public virtual Unit Unit { get; set; }
         public virtual ICollection<Spec> Spec { get; set; }
+
+        public string ProductType
+        {
+            get
+            {
+                return IsProduct == true ? "Товар" : "Не товар";
+            }
+        }
     }
 }

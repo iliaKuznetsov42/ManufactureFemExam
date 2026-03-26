@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ManufactureFemExam.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,27 @@ namespace ManufactureFemExam.View.Windows
     /// </summary>
     public partial class AddProductWindow : Window
     {
+
         public AddProductWindow()
         {
             InitializeComponent();
+
+            
+        }
+
+        private void LoadData()
+        {
+
+        }
+
+        private void EditProductBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AddProductBtn_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

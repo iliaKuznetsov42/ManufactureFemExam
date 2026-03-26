@@ -23,7 +23,16 @@ namespace ManufactureFemExam.Model
         public int Number { get; set; }
         public System.DateTime date { get; set; }
         public decimal TotalPrice { get; set; }
-    
+        public bool IsOrder {  get; set; }
+
+        public string OrderType
+        {
+            get
+            {
+                return IsOrder == true ? "В работе" : "Завершён";
+            }
+        }
+
         public virtual ICollection<OrderProduct> OrderProduct { get; set; }
     }
 }

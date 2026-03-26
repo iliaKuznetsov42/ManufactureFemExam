@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ManufactureFemExam.Model;
+using ManufactureFemExam.View.Windows;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,15 +22,46 @@ namespace ManufactureFemExam.View.Pages
     /// </summary>
     public partial class ManufacturePage : Page
     {
+        string selectedProduct;
+        private List<Product> _products;
+        private List<string> _productTypes = new List<string>()
+        {
+            "Все",
+            "Товар",
+            "Не товар"
+        };
         public ManufacturePage()
         {
             InitializeComponent();
 
+            FilterCmb.ItemsSource = _productTypes;
+            FilterCmb.SelectedIndex = 0;
+
             ProductLv.ItemsSource = App.context.Product.ToList();
+
+            LoadData();
+        }
+
+        private void LoadData()
+        {
+            _products = App.context.Product.ToList();
+            if (selectedProduct == "Все")
+            {
+                ProductLv.ItemsSource = _products;
+            }
+            else
+            {
+                ProductLv.ItemsSource = _products.Where(c => c.IsProduct = Convert.ToBoolean(selectedProduct));
+            }
         }
 
         private void AddProductBtn_Click(object sender, RoutedEventArgs e)
         {
+            AddProductWindow addProductWindow = new AddProductWindow();
+            if (addProductWindow.ShowDialog() == true)
+            {
+                LoadData();
+            }
 
         }
 
@@ -44,12 +77,24 @@ namespace ManufactureFemExam.View.Pages
 
         private void SearchTb_TextChanged(object sender, TextChangedEventArgs e)
         {
+            string searchString = SearchTb.Text.ToLower();
+            if (string.IsNullOrWhiteSpace(searchString))
+            {
+                LoadData();
+                return;
+            }
+            var filteredList = _products.Where(product => product.Name.ToLower().Contains(searchString) ||
+            product.Price.ToLower().Contains(searchString) ||
+            product.Phone.ToLower().Contains(searchString) ||
+            product.Address.ToLower().Contains(searchString)).ToList();
 
+            CompaniesLv.ItemsSource = filteredList;
         }
 
         private void FilterCmb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            selectedProduct = FilterCmb.SelectedItem.ToString();
+            LoadData();
         }
     }
 }
