@@ -1,0 +1,56 @@
+﻿<Page x:Class="ManufactureFemExam.View.Pages.OrderPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ManufactureFemExam.View.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="784" d:DesignWidth="1560"
+      Title="OrderPage">
+
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="20" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="300" />
+                <ColumnDefinition Width="20" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="300" />
+            </Grid.ColumnDefinitions>
+            <Button Name="AddCompiesBtn" Grid.Column="0" Click="AddCompiesBtn_Click"  Content="Добавить" />
+            <Button Name="EditCompanyBtn" Grid.Column="4" Click="EditCompanyBtn_Click"  Content="Редактировать" />
+            <Button Name="RemoveComanyBtn" Grid.Column="2" Click="RemoveComanyBtn_Click"  Content="Удалить" />
+
+            <TextBlock Grid.Column="8" Text="Поиск:"/>
+            <TextBox Name="SearchTb" Grid.Column="10" TextChanged="SearchTb_TextChanged"/>
+
+            <TextBlock Grid.Column="12" Text="Фильтр:"/>
+            <ComboBox Name="FilterCmb" Grid.Column="14" SelectionChanged="FilterCmb_SelectionChanged"/>
+        </Grid>
+
+        <ListView Name="OrderLv" Grid.Row="2" Grid.ColumnSpan="15">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Номер" DisplayMemberBinding="{Binding Number}"/>
+                    <GridViewColumn Header="Дата" DisplayMemberBinding="{Binding date}"/>
+                    <GridViewColumn Header="Цена" DisplayMemberBinding="{Binding TotalPrice}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</Page>

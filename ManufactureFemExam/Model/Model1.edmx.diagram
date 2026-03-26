@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="228453ec47d847e0930bd00e37168e34" Name="Diagram1">
+        <EntityTypeShape EntityType="DE_ManufactureModel.Company" Width="1.5" PointX="6" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DE_ManufactureModel.Manufacture" Width="1.5" PointX="5.25" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="DE_ManufactureModel.Material" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DE_ManufactureModel.Order" Width="1.5" PointX="3" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DE_ManufactureModel.OrderProduct" Width="1.5" PointX="5.25" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DE_ManufactureModel.Product" Width="1.5" PointX="3" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DE_ManufactureModel.Spec" Width="1.5" PointX="8.25" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DE_ManufactureModel.SpecMaterial" Width="1.5" PointX="5.25" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DE_ManufactureModel.Unit" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
+        <AssociationConnector Association="DE_ManufactureModel.FK_Spec_Company" ManuallyRouted="false" />
+        <AssociationConnector Association="DE_ManufactureModel.FK_Manufacture_Material" ManuallyRouted="false" />
+        <AssociationConnector Association="DE_ManufactureModel.FK_Manufacture_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="DE_ManufactureModel.FK_Material_Unit" ManuallyRouted="false" />
+        <AssociationConnector Association="DE_ManufactureModel.FK_SpecMaterial_Material" ManuallyRouted="false" />
+        <AssociationConnector Association="DE_ManufactureModel.FK_OrderProduct_Order" ManuallyRouted="false" />
+        <AssociationConnector Association="DE_ManufactureModel.FK_OrderProduct_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="DE_ManufactureModel.FK_Product_Unit" ManuallyRouted="false" />
+        <AssociationConnector Association="DE_ManufactureModel.FK_Spec_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="DE_ManufactureModel.FK_SpecMaterial_Spec" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
