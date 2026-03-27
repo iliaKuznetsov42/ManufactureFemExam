@@ -35,6 +35,8 @@ namespace ManufactureFemExam.View.Pages
             InitializeComponent();
 
             _orders = App.context.Order.ToList();
+
+            OrderLv.ItemsSource = App.context.Order.ToList();
         }
 
         private void AddCompiesBtn_Click(object sender, RoutedEventArgs e)
@@ -57,7 +59,7 @@ namespace ManufactureFemExam.View.Pages
             }
             else
             {
-                OrderLv.ItemsSource = _orders.Where(c => c.IsOrder == Convert.ToBoolean(selectedOrderType));
+                OrderLv.ItemsSource = _orders.Where(c => c.IsOrder == Convert.ToBoolean(_orderTypes));
             }
         }
 

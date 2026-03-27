@@ -57,7 +57,7 @@ namespace ManufactureFemExam.View.Pages
                 }
                 catch
                 {
-                    MessageBox.Show("Невохможно удалить компанию");
+                    MessageBox.Show("Невозможно удалить компанию");
                 }
 
 

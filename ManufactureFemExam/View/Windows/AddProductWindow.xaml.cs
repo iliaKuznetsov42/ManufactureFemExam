@@ -25,7 +25,9 @@ namespace ManufactureFemExam.View.Windows
         {
             InitializeComponent();
 
-            
+            UnitCmb.SelectedValuePath = "id";
+            UnitCmb.DisplayMemberPath = "Name";
+            UnitCmb.ItemsSource = App.context.Unit.ToList();
         }
 
         private void LoadData()
@@ -40,7 +42,43 @@ namespace ManufactureFemExam.View.Windows
 
         private void AddProductBtn_Click(object sender, RoutedEventArgs e)
         {
+            if (Validate())
+            {
+                Product newProduct = new Product()
+                {
+                    Name = NameProductTb.Text,
+                    Price = Convert.ToInt32(PriceTb.Text),
+                    Unit = UnitCmb.SelectedItem as Unit
 
+                };
+                App.context.Product.Add(newProduct);
+                App.context.SaveChanges();
+            }
+        }
+
+        private bool Validate()
+        {
+            if (string.IsNullOrWhiteSpace(NameProductTb.Text))
+            {
+                MessageBox.Show("Введите название товара");
+                NameProductTb.Focus();
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(PriceTb.Text))
+            {
+                MessageBox.Show("Введите цену");
+                PriceTb.Focus();
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(UnitCmb.Text))
+            {
+                MessageBox.Show("Выберите ед измерения");
+                UnitCmb.Focus();
+                return false;
+            }
+
+
+            return true;
         }
     }
 }
