@@ -77,18 +77,7 @@ namespace ManufactureFemExam.View.Pages
 
         private void SearchTb_TextChanged(object sender, TextChangedEventArgs e)
         {
-            string searchString = SearchTb.Text.ToLower();
-            if (string.IsNullOrWhiteSpace(searchString))
-            {
-                LoadData();
-                return;
-            }
-            var filteredList = _products.Where(product => product.Name.ToLower().Contains(searchString) ||
-            product.Price.ToLower().Contains(searchString) ||
-            product.Phone.ToLower().Contains(searchString) ||
-            product.Address.ToLower().Contains(searchString)).ToList();
 
-            CompaniesLv.ItemsSource = filteredList;
         }
 
         private void FilterCmb_SelectionChanged(object sender, SelectionChangedEventArgs e)
