@@ -24,9 +24,18 @@ namespace ManufactureFemExam.Model
         public int ManufacturerId { get; set; }
         public decimal Amount { get; set; }
         public int UnitId { get; set; }
+        public bool IsSpec { get; set; }
     
         public virtual Company Company { get; set; }
         public virtual Product Product { get; set; }
         public virtual ICollection<SpecMaterial> SpecMaterial { get; set; }
+
+        public string SpecType
+        {
+            get
+            {
+                return IsSpec == true ? "Товар" : "Не товар";
+            }
+        }
     }
 }

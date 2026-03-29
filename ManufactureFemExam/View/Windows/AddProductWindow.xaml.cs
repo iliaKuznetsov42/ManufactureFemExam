@@ -20,15 +20,29 @@ namespace ManufactureFemExam.View.Windows
     /// </summary>
     public partial class AddProductWindow : Window
     {
+        public readonly Product _currentProduct;
 
         public AddProductWindow()
         {
             InitializeComponent();
-
+            Title = "Добавление продукта";
+            AddProductBtn.Visibility = Visibility.Visible;
+            EditProductBtn.Visibility = Visibility.Collapsed;
+        }
+        //Конструктор Добавления
+        public AddProductWindow(Product selectedProduct)
+        {
+            InitializeComponent();
+            _currentProduct = selectedProduct;
+            Title = "Редактирование данных продукта";
+            EditProductBtn.Visibility = Visibility.Visible;
+            AddProductBtn.Visibility = Visibility.Collapsed;            
+            
             UnitCmb.SelectedValuePath = "id";
             UnitCmb.DisplayMemberPath = "Name";
             UnitCmb.ItemsSource = App.context.Unit.ToList();
         }
+
 
         private void LoadData()
         {
@@ -37,7 +51,9 @@ namespace ManufactureFemExam.View.Windows
 
         private void EditProductBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            App.context.SaveChanges();
+            MessageBox.Show("Данные продукта успешно обновлены");
+            DialogResult = true;
         }
 
         private void AddProductBtn_Click(object sender, RoutedEventArgs e)
@@ -51,7 +67,14 @@ namespace ManufactureFemExam.View.Windows
                     Unit = UnitCmb.SelectedItem as Unit
 
                 };
+                Spec newSpec = new Spec()
+                {
+                    Amount = Convert.ToInt32(AmountTb.Text)
+                };
+                
                 App.context.Product.Add(newProduct);
+                App.context.SaveChanges();
+                App.context.Spec.Add(newSpec);
                 App.context.SaveChanges();
             }
         }
@@ -74,6 +97,12 @@ namespace ManufactureFemExam.View.Windows
             {
                 MessageBox.Show("Выберите ед измерения");
                 UnitCmb.Focus();
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(AmountTb.Text))
+            {
+                MessageBox.Show("Введите количество");
+                AmountTb.Focus();
                 return false;
             }
 

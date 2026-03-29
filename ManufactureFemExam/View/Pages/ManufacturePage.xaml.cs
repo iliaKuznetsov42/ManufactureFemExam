@@ -24,6 +24,7 @@ namespace ManufactureFemExam.View.Pages
     {
         string selectedProduct;
         private List<Product> _products;
+        private List<Spec> _specs;
         private List<string> _productTypes = new List<string>()
         {
             "Все",
@@ -67,7 +68,16 @@ namespace ManufactureFemExam.View.Pages
 
         private void EditProductBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            Product selectedProduct = (Product)ProductLv.SelectedItem;
+            if (selectedProduct != null)
+            {
+                AddProductWindow addProductWindow = new AddProductWindow(selectedProduct);
+                addProductWindow.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Сначала выберите продукт");
+            }
         }
 
         private void RemoveProductBtn_Click(object sender, RoutedEventArgs e)
@@ -77,7 +87,20 @@ namespace ManufactureFemExam.View.Pages
 
         private void SearchTb_TextChanged(object sender, TextChangedEventArgs e)
         {
+            string searchString = SearchTb.Text.ToLower();
+            if (string.IsNullOrWhiteSpace(searchString))
+            {
+                LoadData();
+                return;
+            }
+            var filteredList = _products.Where(product => product.Name.ToLower().Contains(searchString) ||
+            product.Price.ToString().Contains(searchString) ||
+            product.Unit.Name.ToLower().Contains(searchString)).ToList(); 
+            
+            var filteredList1 = _specs.Where(spec => spec.Amount.ToString().Contains(searchString)).ToList();
 
+            ProductLv.ItemsSource = filteredList;
+            ProductLv.ItemsSource = filteredList1;
         }
 
         private void FilterCmb_SelectionChanged(object sender, SelectionChangedEventArgs e)

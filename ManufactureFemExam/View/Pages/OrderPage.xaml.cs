@@ -41,8 +41,8 @@ namespace ManufactureFemExam.View.Pages
 
         private void AddCompiesBtn_Click(object sender, RoutedEventArgs e)
         {
-            AddProductWindow addProduct = new AddProductWindow();
-            if (addProduct.ShowDialog() == true)
+            AddOrderWindow addOrder = new AddOrderWindow();
+            if (addOrder.ShowDialog() == true)
             {
                 LoadData();
             }
@@ -65,7 +65,16 @@ namespace ManufactureFemExam.View.Pages
 
         private void EditCompanyBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            Order selectedOrderType = (Order)OrderLv.SelectedItem;
+            if (selectedOrderType != null)
+            {
+                AddOrderWindow addOrderWindow = new AddOrderWindow(selectedOrderType);
+                addOrderWindow.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Сначала выберите заказ");
+            }
         }
 
         private void RemoveComanyBtn_Click(object sender, RoutedEventArgs e)
@@ -75,12 +84,23 @@ namespace ManufactureFemExam.View.Pages
 
         private void SearchTb_TextChanged(object sender, TextChangedEventArgs e)
         {
+            string searchString = SearchTb.Text.ToLower();
+            if (string.IsNullOrWhiteSpace(searchString))
+            {
+                LoadData();
+                return;
+            }
+            var filteredList = _orders.Where(order => order.Number.ToString().Contains(searchString) ||
+            order.date.ToString().Contains(searchString) ||
+            order.TotalPrice.ToString().Contains(searchString)).ToList();
 
+            OrderLv.ItemsSource = filteredList;
         }
 
         private void FilterCmb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            selectedOrderType = FilterCmb.SelectedItem.ToString();
+            LoadData();
         }
     }
 }
